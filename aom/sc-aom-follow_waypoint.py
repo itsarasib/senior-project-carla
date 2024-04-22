@@ -79,16 +79,16 @@ def main():
     spawn_points = world.get_map().get_spawn_points()
 
     # Define the initial spawn point and spawn the vehicle
-    spawn_point =carla.Transform(carla.Location(spawn_points[219].location), carla.Rotation(pitch=0, yaw=90, roll=0))  
+    spawn_point =carla.Transform(carla.Location(spawn_points[190].location), carla.Rotation(pitch=0, yaw=180, roll=0))  
     vehicle = world.spawn_actor(vehicle_bp, spawn_point)
-    destination = carla.Location(carla.Location(spawn_points[251].location))
+    destination = carla.Location(carla.Location(spawn_points[300].location))
     # Enable autopilot using Traffic Manager
     tm = client.get_trafficmanager()
     vehicle.set_autopilot(True, tm.get_port())
     tm.ignore_lights_percentage(vehicle, random.randint(0,100))
 
     # Define the route using the indices of additional spawn points
-    route_indices = [215, 52, 258, 298,88,55,184,251]
+    route_indices = [190, 63, 249, 182, 5, 83, 300]
     route_locations = [spawn_points[i].location for i in route_indices]  # Extracting locations directly
     # Set the route for the vehicle using the traffic manager
     tm.set_path(vehicle, route_locations)  # Use locations instead of waypoints
